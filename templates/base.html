@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link 
+href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap" 
+rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+ <link 
+href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap" 
+rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Diverge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link 
+href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" 
+rel="stylesheet">
+
+    <!-- Link to your CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    {% if show_banner %}
+    <div class="top-banner">
+        <a href="/career" class="service-button">Career Guidance
+            <div class="service-summary">Explore careers tailored to you.</div>
+        </a>
+        <a href="/relationships" class="service-button">Relationships
+            <div class="service-summary">Tips for connecting authentically.</div>
+        </a>
+        <a href="/housing" class="service-button">Housing
+            <div class="service-summary">Find co-living that suits your vibe.</div>
+        </a>
+        <a href="/tasks" class="service-button">Task Management
+            <div class="service-summary">Stay on top of routines & goals.</div>
+        </a>
+        <a href="/tips" class="service-button">Tips + Advice
+            <div class="service-summary">Life hacks for neurodivergent folks.</div>
+        </a>
+        <a href="/resources" class="service-button">Resources
+            <div class="service-summary">What’s out there to support you.</div>
+        </a>
+        <a href="/about" class="service-button">About Us
+            <div class="service-summary">Why Diverge exists and who we are.</div>
+        </a>
+    </div>
+    {% endif %}
+
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>
+

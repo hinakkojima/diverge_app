@@ -1,0 +1,22 @@
+{
+  "name": "DIVERGE",
+  "short_name": "Diverge",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6ca2db",
+  "description": "AI-powered platform for neurodivergent support.",
+  "icons": [
+    {
+      "src": "/static/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/static/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
+

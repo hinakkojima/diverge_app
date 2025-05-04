@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DIVERGE</title>
+
+  <!-- PWA Manifest & Theme -->
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#6ca2db">
+
+  <!-- Fonts -->
+  <link 
+href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" 
+rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      background: url("/static/background.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color: black;
+    }
+
+    .banner {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      justify-items: center;
+      align-items: center;
+      background-color: rgba(108, 162, 219, 0.3);
+      padding: 1rem 2rem;
+      gap: 1rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .service-button {
+      position: relative;
+      background-color: white;
+      color: black;
+      padding: 1rem 1.2rem;
+      border: 2px solid rgba(255, 182, 193, 0.8);
+      border-radius: 12px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      width: 100%;
+      max-width: 180px;
+    }
+
+    .service-button:hover {
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      transform: scale(1.03);
+    }
+
+    .service-button .summary {
+      position: absolute;
+      top: 105%;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 0.75rem;
+      padding: 0.4rem;
+      color: #333;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 10;
+    }
+
+    .service-button:hover .summary {
+      opacity: 1;
+    }
+
+    .center-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: calc(100vh - 160px);
+      padding: 2rem;
+    }
+
+    .center-container {
+      background-color: rgba(108, 162, 219, 0.7);
+      padding: 3rem 4rem;
+      border-radius: 20px;
+      border: 2px solid rgba(255, 182, 193, 0.8);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .main-title {
+      font-size: 3.5rem;
+      font-weight: bold;
+      color: black;
+      margin-bottom: 2rem;
+      letter-spacing: 1px;
+    }
+
+    .action-button {
+      background-color: white;
+      color: black;
+      padding: 0.9rem 2.2rem;
+      margin: 0.5rem;
+      font-size: 1rem;
+      border: 2px solid #5a9bd8;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .action-button:hover {
+      background-color: rgba(108, 162, 219, 0.15);
+      border-color: #3a8ac4;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Banner -->
+  <div class="banner">
+    <div class="service-button">Career Guidance
+      <div class="summary">Personalized neurodiverse career paths.</div>
+    </div>
+    <div class="service-button">Navigating Relationships
+      <div class="summary">Support for friendships and romance.</div>
+    </div>
+    <div class="service-button">Housing Facilitation
+      <div class="summary">Find people and spaces that feel right.</div>
+    </div>
+    <div class="service-button">Routine & Tasks
+      <div class="summary">Stay organized without burning out.</div>
+    </div>
+    <div class="service-button">Resources
+      <div class="summary">Curated tools, books, and support.</div>
+    </div>
+    <div class="service-button">About Us
+      <div class="summary">Why DIVERGE exists and who we serve.</div>
+    </div>
+  </div>
+
+  <!-- Main Center Section -->
+  <div class="center-wrapper">
+    <div class="center-container">
+      <div class="main-title">DIVERGE</div>
+      <a href="/register"><button class="action-button">Create an 
+Account</button></a>
+      <a href="/login"><button class="action-button">Log In</button></a>
+    </div>
+  </div>
+
+  <!-- Register Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/static/service-worker.js')
+        .then(() => console.log("✅ Service worker registered"))
+        .catch(err => console.error("❌ Service worker registration failed:", 
+err));
+    }
+  </script>
+</body>
+</html>
+

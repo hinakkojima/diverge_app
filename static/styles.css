@@ -1,0 +1,230 @@
+/* === Base Fonts and Background === */
+body {
+    font-family: 'Raleway', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('/static/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #222;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* === Top Pink Banner === */
+.top-banner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px 12px;
+    background-color: rgba(255, 182, 193, 0.3); /* light pink transparent */
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(255, 182, 193, 0.4);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+/* === Service Buttons in Top Banner === */
+.service-button {
+    display: inline-block;
+    padding: 14px 20px;
+    border-radius: 16px;
+    background-color: #ffffff;
+    color: #333;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease;
+    position: relative;
+    text-align: center;
+    min-width: 160px;
+}
+
+.service-button:hover {
+    transform: scale(1.05);
+    background-color: #f0f0f0;
+}
+
+.service-button .service-summary {
+    display: none;
+    position: absolute;
+    top: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.85em;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 10;
+}
+
+.service-button:hover .service-summary {
+    display: block;
+}
+
+/* === Main Page Container === */
+.main-content {
+    padding: 80px 20px 60px;
+    max-width: 800px;
+    margin: 40px auto;
+    background-color: rgba(255, 255, 255, 0.92);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+/* === Headings and Paragraphs === */
+h1, h2, h3 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: #2d2d2d;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.2rem;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+/* === Main Buttons (Register / Login / Logout) === */
+.main-button {
+    background-color: #333;
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+.main-button:hover {
+    background-color: #555;
+}
+
+.main-button.secondary {
+    background-color: transparent;
+    color: #333;
+    border: 2px solid #333;
+}
+
+.main-button.secondary:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+/* === Homepage Box === */
+.homepage-box {
+    background-color: rgba(255, 182, 193, 0.3);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 182, 193, 0.4);
+    border-radius: 16px;
+    padding: 40px 30px;
+    margin: 0 auto;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.homepage-buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* === Login Page Styling === */
+.login-box {
+    background-color: rgba(255, 255, 255, 0.92);
+    padding: 40px 30px;
+    border-radius: 16px;
+    max-width: 400px;
+    margin: 40px auto;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.login-form input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    font-family: 'Raleway', sans-serif;
+}
+
+.login-form input:focus {
+    border-color: #999;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+    font-size: 0.95rem;
+}
+
+.redirect-link {
+    margin-top: 20px;
+    font-size: 0.95rem;
+}
+
+/* === Dashboard Styling === */
+.dashboard-box {
+    background-color: rgba(255, 255, 255, 0.92);
+    padding: 40px 30px;
+    border-radius: 16px;
+    max-width: 600px;
+    margin: 40px auto;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.dashboard-buttons {
+    margin-top: 30px;
+}
+
+.register-box {
+    background-color: rgba(255, 255, 255, 0.92);
+    padding: 40px 30px;
+    border-radius: 16px;
+    max-width: 400px;
+    margin: 40px auto;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.register-form input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    font-family: 'Raleway', sans-serif;
+}
+
+.register-form input:focus {
+    border-color: #999;
+}
+
+.error-container {
+    background-color: #ffe6e6;
+    margin-top: 30px;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    color: #a33;
+}
+
