@@ -1,57 +1,72 @@
-import os
+from flask import Flask, request, redirect, url_for, render_template, session
 import json
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+import os
 
 app = Flask(__name__)
+app.secret_key = "your_secret_key"
 
-# Secret key from environment variable (or fallback)
-app.secret_key = os.environ.get("SECRET_KEY", "dev-secret")
-
-# File to store user data
 DATA_FILE = "users_data.json"
 
-# Load user data
+# ---------------- Helper Functions ----------------
+
 def load_data():
     if not os.path.exists(DATA_FILE):
         return {"users": []}
     with open(DATA_FILE, "r") as f:
         return json.load(f)
 
-# Save user data
 def save_data(data):
     with open(DATA_FILE, "w") as f:
         json.dump(data, f, indent=4)
 
+def score_match(user1, user2):
+    profile1 = user1.get("profile")
+    profile2 = user2.get("profile")
+    if not profile1 or not profile2:
+        return 0
+    score = 0
+
+    # Gender match
+    if profile2["gender"] == profile1["gender"] or profile2["gender"] in profile1["preferences"]["gender"]:
+        score += 2
+
+    # Age difference
+    age_diff = abs(profile1["age"] - profile2["age"])
+    if age_diff <= 3:
+        score += 2
+    elif age_diff <= 5:
+        score += 1
+
+    # Personality match
+    if profile1["personality"] == profile2["personality"]:
+        score += 3
+
+    # Interests overlap
+    shared_interests = set(profile1["interests"]).intersection(set(profile2["interests"]))
+    score += len(shared_interests)
+
+    return score
+
+# ---------------- Routes ----------------
+
 @app.route("/")
 def home():
-    return render_template("home.html")
+    return "Welcome to the Diverge app!"
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
-        email = request.form.get("email")
-        password = request.form.get("password")
-        name = request.form.get("name")
+        email = request.form["email"]
+        password = request.form["password"]
+        name = request.form["name"]
 
         data = load_data()
+        if any(u["email"] == email for u in data["users"]):
+            return "Account already exists. <a href='/login'>Log in here</a>"
 
-        # Check if email already exists
-        for user in data["users"]:
-            if user["email"] == email:
-                flash("Account already exists. Log in instead.")
-                return redirect(url_for("login"))
-
-        # Save new user
-        new_user = {
-            "email": email,
-            "password": password,
-            "name": name,
-            "profile": {}
-        }
+        new_user = {"email": email, "password": password, "name": name, "profile": {}}
         data["users"].append(new_user)
         save_data(data)
-
-        flash("Account created. Please log in.")
         return redirect(url_for("login"))
 
     return render_template("register.html")
@@ -59,37 +74,28 @@ def register():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        email = request.form.get("email")
-        password = request.form.get("password")
+        email = request.form["email"]
+        password = request.form["password"]
 
         data = load_data()
-
-        for user in data["users"]:
-            if user["email"] == email and user["password"] == password:
-                session["user"] = user["email"]
-                flash("Welcome back!")
-                return redirect(url_for("dashboard"))
-
-        flash("Invalid credentials. Try again.")
-        return redirect(url_for("login"))
+        user = next((u for u in data["users"] if u["email"] == email and u["password"] == password), None)
+        if user:
+            session["user_email"] = user["email"]
+            return redirect(url_for("dashboard"))
+        else:
+            return "Invalid credentials. <a href='/login'>Try again</a>"
 
     return render_template("login.html")
 
 @app.route("/dashboard")
 def dashboard():
-    if "user" not in session:
+    if "user_email" not in session:
         return redirect(url_for("login"))
+    return f"Welcome, {session['user_email']}! This is your dashboard."
 
-    data = load_data()
-    user = next((u for u in data["users"] if u["email"] == session["user"]), None)
-    return render_template("dashboard.html", user=user)
-
-@app.route("/logout")
-def logout():
-    session.pop("user", None)
-    flash("You’ve been logged out.")
-    return redirect(url_for("home"))
+# ---------------- Deployment Entry ----------------
 
 if __name__ == "__main__":
-    app.run(debug=(os.environ.get("FLASK_ENV") != "production"))
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
 
